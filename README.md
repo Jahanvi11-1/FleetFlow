@@ -32,19 +32,45 @@ A full-stack fleet management platform built with Flask (Python) and React.
 ```bash
 cd backend
 pip install -r requirements.txt
+pip install psycopg2-binary
 ```
 
 2. Set up environment variables:
 ```bash
 cp .env.example .env
-# Edit .env with your database credentials
-```
+
+# Edit .env with your database credentials``
+
 
 3. Initialize the database:
 ```bash
 flask db init
 flask db migrate -m "Initial migration"
 flask db upgrade
+
+# Enter entry in user table in postgresql 
+# To Encrypt Password as well as sucessful log in do the following steps
+flask shell
+
+# Import your database object and User model
+from app import db
+from app.models import User
+
+# 1. Find the user you manually added to PostgreSQL
+# Replace 'your_email@example.com' with the actual email in your DB
+user = User.query.filter_by(email='admin@example.com').first()
+
+# 2. Convert the plain text password into a secure hash
+# This uses the set_password method from your models.py
+user.set_password('your_new_password')
+
+# 3. Save the changes to the PostgreSQL database
+db.session.commit()
+
+# 4. Exit the shell
+exit()
+
+
 ```
 
 4. Run the development server:
