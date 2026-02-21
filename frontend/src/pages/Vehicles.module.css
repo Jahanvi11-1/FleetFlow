@@ -1,173 +1,285 @@
+/* Professional Prism Theme - Shared Page Styles */
+
+/* Container */
 .container {
-  padding: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding: var(--spacing-xl);
+  min-height: 100vh;
+  background: var(--bg-primary);
 }
 
+/* Header */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-xl);
 }
 
 .title {
   font-size: 2rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.025em;
 }
 
+/* Add Button */
 .addButton {
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--accent-primary);
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
+  border-radius: var(--radius-lg);
+  font-size: 0.9375rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
 }
 
 .addButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+  background: var(--accent-primary-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
+.addButton:active {
+  transform: translateY(0);
+}
+
+/* Controls */
 .controls {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
+.searchInput,
+.filterSelect {
+  padding: 0.75rem 1rem;
+  background: var(--bg-white);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  transition: all var(--transition-base);
 }
 
 .searchInput {
   flex: 1;
-  padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  color: #fff;
-  font-size: 1rem;
-}
-
-.searchInput::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  min-width: 250px;
 }
 
 .filterSelect {
-  padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  color: #fff;
-  font-size: 1rem;
   min-width: 150px;
 }
 
+.searchInput:focus,
+.filterSelect:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Vehicle Grid */
 .vehicleGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
+  gap: var(--spacing-lg);
 }
 
+/* Vehicle Card */
 .vehicleCard {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 1.5rem;
-  transition: transform 0.2s, box-shadow 0.2s;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-lg);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
 }
 
 .vehicleCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-secondary);
+  transform: translateY(-2px);
 }
 
 .vehicleHeader {
   display: flex;
   justify-content: space-between;
-  align-items: start;
-  margin-bottom: 1rem;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-md);
+  gap: var(--spacing-sm);
 }
 
 .vehicleModel {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
   margin: 0;
+  flex: 1;
+  letter-spacing: -0.01em;
 }
 
+/* Status Pills */
 .statusPill {
+  display: inline-flex;
+  align-items: center;
   padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.875rem;
-  font-weight: 500;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 .statusAvailable {
-  background: rgba(16, 185, 129, 0.2);
-  color: #10b981;
+  background: var(--status-green-bg);
+  color: var(--status-green-text);
+  border: 1px solid var(--status-green-border);
 }
 
 .statusOnTrip {
-  background: rgba(251, 191, 36, 0.2);
-  color: #fbbf24;
+  background: var(--status-amber-bg);
+  color: var(--status-amber-text);
+  border: 1px solid var(--status-amber-border);
 }
 
 .statusInShop {
-  background: rgba(239, 68, 68, 0.2);
-  color: #ef4444;
+  background: var(--status-amber-bg);
+  color: var(--status-amber-text);
+  border: 1px solid var(--status-amber-border);
 }
 
+/* Vehicle Details */
 .vehicleDetails {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--spacing-sm);
 }
 
 .detailRow {
   display: flex;
   justify-content: space-between;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.875rem;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.detailRow:last-child {
+  border-bottom: none;
 }
 
 .detailLabel {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
   font-weight: 500;
 }
 
 .detailValue {
-  color: #fff;
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  font-weight: 500;
 }
 
-.loading {
-  text-align: center;
-  padding: 3rem;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 1.125rem;
-}
-
-.error {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: 8px;
-  padding: 1rem;
-  color: #ef4444;
-  margin-bottom: 1rem;
-}
-
+/* Empty State */
 .empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
   text-align: center;
-  padding: 3rem;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.emptyIcon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
 }
 
 .emptyText {
-  font-size: 1.125rem;
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Loading State */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  font-size: 1rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+/* Error State */
+.error {
+  background: var(--status-red-bg);
+  border: 1px solid var(--status-red-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  color: var(--status-red-text);
+  margin-bottom: var(--spacing-lg);
+  font-weight: 500;
+}
+
+/* Success State */
+.success {
+  background: var(--status-green-bg);
+  border: 1px solid var(--status-green-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  color: var(--status-green-text);
+  margin-bottom: var(--spacing-lg);
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-md);
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+  }
+
+  .addButton {
+    width: 100%;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .searchInput,
+  .filterSelect {
+    width: 100%;
+  }
+
+  .vehicleGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--spacing-sm);
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .vehicleCard {
+    padding: var(--spacing-md);
+  }
 }

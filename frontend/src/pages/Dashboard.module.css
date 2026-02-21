@@ -11,19 +11,17 @@
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: var(--spacing-sm);
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  margin-bottom: var(--spacing-xs);
+  letter-spacing: -0.025em;
 }
 
 .subtitle {
-  font-size: 1.125rem;
+  font-size: 1rem;
   color: var(--text-tertiary);
+  font-weight: 400;
 }
 
 /* Bento Grid Layout */
@@ -31,24 +29,22 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: var(--spacing-lg);
-  grid-auto-rows: minmax(150px, auto);
+  grid-auto-rows: minmax(140px, auto);
 }
 
 /* Widget Base Styles */
 .widget {
-  background: var(--glass-bg-secondary);
-  backdrop-filter: var(--glass-blur);
-  border: var(--glass-border);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);
   transition: all var(--transition-base);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
 }
 
 .widget:hover {
-  background: var(--glass-bg-tertiary);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-secondary);
 }
 
 /* Widget Sizes - Bento Grid Layout */
@@ -86,10 +82,11 @@
 }
 
 .widgetTitle {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: var(--spacing-md);
+  letter-spacing: -0.01em;
 }
 
 .widgetLink {
@@ -97,6 +94,7 @@
   color: var(--accent-primary);
   text-decoration: none;
   transition: color var(--transition-fast);
+  font-weight: 500;
 }
 
 .widgetLink:hover {
@@ -107,21 +105,21 @@
   font-size: 0.875rem;
   color: var(--text-muted);
   margin-top: var(--spacing-sm);
+  font-weight: 400;
 }
 
 /* Stats Grid (inside Fleet Overview) */
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
   margin-top: var(--spacing-lg);
 }
 
 .statCard {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  background: var(--glass-bg-light);
+  flex-direction: column;
+  background: var(--bg-secondary);
   padding: var(--spacing-lg);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-primary);
@@ -129,17 +127,22 @@
 }
 
 .statCard:hover {
-  background: var(--glass-bg-medium);
-  transform: translateX(4px);
-}
-
-.statIcon {
-  font-size: 2rem;
-  line-height: 1;
+  background: var(--bg-white);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border-secondary);
 }
 
 .statContent {
   flex: 1;
+}
+
+.statLabel {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .statValue {
@@ -147,25 +150,17 @@
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1;
-  margin-bottom: var(--spacing-xs);
-}
-
-.statLabel {
-  font-size: 0.875rem;
-  color: var(--text-tertiary);
+  letter-spacing: -0.025em;
 }
 
 /* Big Number Display */
 .bigNumber {
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--accent-primary);
   line-height: 1;
   margin: var(--spacing-lg) 0;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: -0.025em;
 }
 
 .miniStat {
@@ -180,6 +175,7 @@
 .miniStatLabel {
   font-size: 0.875rem;
   color: var(--text-tertiary);
+  font-weight: 500;
 }
 
 .miniStatValue {
@@ -192,12 +188,12 @@
 .tripList {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
   margin-top: var(--spacing-md);
 }
 
 .tripItem {
-  background: var(--glass-bg-light);
+  background: var(--bg-secondary);
   padding: var(--spacing-md);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-primary);
@@ -205,14 +201,15 @@
 }
 
 .tripItem:hover {
-  background: var(--glass-bg-medium);
+  background: var(--bg-white);
   border-color: var(--border-secondary);
+  box-shadow: var(--shadow-sm);
 }
 
 .tripRoute {
   font-size: 0.9375rem;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   margin-bottom: var(--spacing-sm);
 }
 
@@ -226,49 +223,50 @@
 .tripStatus {
   display: inline-flex;
   align-items: center;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: 0.25rem 0.625rem;
   border-radius: var(--radius-full);
-  font-size: 0.75rem;
-  font-weight: 500;
+  font-size: 0.6875rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.05em;
 }
 
 .tripDate {
   font-size: 0.8125rem;
   color: var(--text-muted);
+  font-weight: 400;
 }
 
-/* Status Colors */
+/* Status Colors - Professional Prism Theme */
 .statusGreen {
   background: var(--status-green-bg);
-  color: var(--status-green);
+  color: var(--status-green-text);
   border: 1px solid var(--status-green-border);
 }
 
 .statusYellow {
-  background: var(--status-yellow-bg);
-  color: var(--status-yellow);
-  border: 1px solid var(--status-yellow-border);
+  background: var(--status-amber-bg);
+  color: var(--status-amber-text);
+  border: 1px solid var(--status-amber-border);
 }
 
 .statusRed {
   background: var(--status-red-bg);
-  color: var(--status-red);
+  color: var(--status-red-text);
   border: 1px solid var(--status-red-border);
 }
 
 .statusGray {
-  background: var(--status-gray-bg);
-  color: var(--status-gray);
-  border: 1px solid var(--status-gray-border);
+  background: var(--status-slate-bg);
+  color: var(--status-slate-text);
+  border: 1px solid var(--status-slate-border);
 }
 
 /* Performer List */
 .performerList {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
   margin-top: var(--spacing-md);
 }
 
@@ -276,7 +274,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  background: var(--glass-bg-light);
+  background: var(--bg-secondary);
   padding: var(--spacing-md);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-primary);
@@ -284,19 +282,20 @@
 }
 
 .performerItem:hover {
-  background: var(--glass-bg-medium);
-  transform: translateX(4px);
+  background: var(--bg-white);
+  border-color: var(--border-secondary);
+  box-shadow: var(--shadow-sm);
 }
 
 .performerRank {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: var(--gradient-primary);
-  color: var(--text-primary);
-  font-size: 1.25rem;
+  width: 36px;
+  height: 36px;
+  background: var(--accent-primary);
+  color: white;
+  font-size: 1rem;
   font-weight: 700;
   border-radius: var(--radius-full);
   flex-shrink: 0;
@@ -307,19 +306,20 @@
 }
 
 .performerPlate {
-  font-size: 1rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: 0.125rem;
 }
 
 .performerModel {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--text-tertiary);
+  font-weight: 400;
 }
 
 .performerRoi {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
 }
 
@@ -335,21 +335,23 @@
 .actionList {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
   margin-top: var(--spacing-md);
 }
 
 .actionButton {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  background: var(--glass-bg-light);
+  justify-content: center;
+  gap: var(--spacing-sm);
+  background: var(--bg-white);
   padding: var(--spacing-md);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-primary);
-  color: var(--text-secondary);
+  color: var(--text-primary);
   text-decoration: none;
   font-weight: 500;
+  font-size: 0.9375rem;
   transition: all var(--transition-base);
 }
 
@@ -357,12 +359,6 @@
   background: var(--accent-primary-light);
   border-color: var(--accent-primary);
   color: var(--accent-primary);
-  transform: translateX(4px);
-}
-
-.actionIcon {
-  font-size: 1.5rem;
-  line-height: 1;
 }
 
 /* Empty State */
@@ -373,18 +369,13 @@
   justify-content: center;
   padding: var(--spacing-xl);
   text-align: center;
-  min-height: 200px;
-}
-
-.emptyIcon {
-  font-size: 3rem;
-  margin-bottom: var(--spacing-md);
-  opacity: 0.5;
+  min-height: 180px;
 }
 
 .emptyText {
   font-size: 0.9375rem;
   color: var(--text-muted);
+  font-weight: 400;
 }
 
 /* Loading & Error States */
@@ -394,8 +385,9 @@
   align-items: center;
   justify-content: center;
   min-height: 400px;
-  font-size: 1.125rem;
+  font-size: 1rem;
   color: var(--text-tertiary);
+  font-weight: 500;
 }
 
 .error {
@@ -456,15 +448,15 @@
 
   .statsGrid {
     grid-template-columns: 1fr;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
   }
 
   .title {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 
   .bigNumber {
-    font-size: 3rem;
+    font-size: 2.75rem;
   }
 
   .widget {
@@ -479,11 +471,11 @@
   }
 
   .title {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
 
   .subtitle {
-    font-size: 1rem;
+    font-size: 0.9375rem;
   }
 
   .bigNumber {
@@ -491,7 +483,7 @@
   }
 
   .statValue {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 
   .widget {

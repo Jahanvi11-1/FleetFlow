@@ -185,7 +185,6 @@ function Maintenance() {
 
       {filteredLogs.length === 0 ? (
         <div className={styles.empty}>
-          <div className={styles.emptyIcon}>🔧</div>
           <div className={styles.emptyText}>
             {vehicleFilter !== 'all' || statusFilter !== 'all'
               ? 'No maintenance logs match your filters' 

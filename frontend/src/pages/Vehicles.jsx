@@ -161,7 +161,6 @@ function Vehicles() {
 
       {filteredVehicles.length === 0 ? (
         <div className={styles.empty}>
-          <div className={styles.emptyIcon}>🚗</div>
           <div className={styles.emptyText}>
             {searchQuery || statusFilter !== 'all' 
               ? 'No vehicles match your filters' 

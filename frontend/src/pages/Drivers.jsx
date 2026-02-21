@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { driverService } from '../services/driverService';
 import StatusPill from '../components/StatusPill';
+import styles from './Vehicles.module.css';
 
 const Drivers = () => {
   const [drivers, setDrivers] = useState([]);
@@ -23,6 +24,7 @@ const Drivers = () => {
   });
   const [formErrors, setFormErrors] = useState({});
   const [formLoading, setFormLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     loadDrivers();
@@ -54,7 +56,6 @@ const Drivers = () => {
       ...prev,
       [name]: value
     }));
-    // Clear error for this field
     if (formErrors[name]) {
       setFormErrors(prev => ({
         ...prev,
@@ -110,10 +111,11 @@ const Drivers = () => {
         status: 'Off Duty'
       });
       setFormErrors({});
+      setSuccessMessage(editingDriver ? 'Driver updated successfully!' : 'Driver created successfully!');
+      setTimeout(() => setSuccessMessage(''), 3000);
       loadDrivers();
     } else {
       setError(result.error);
-      // Handle field-specific errors from server
       if (result.details && Array.isArray(result.details)) {
         const serverErrors = {};
         result.details.forEach(detail => {
@@ -146,6 +148,8 @@ const Drivers = () => {
     const result = await driverService.deleteDriver(id);
     
     if (result.success) {
+      setSuccessMessage('Driver deleted successfully!');
+      setTimeout(() => setSuccessMessage(''), 3000);
       loadDrivers();
     } else {
       setError(result.error);
@@ -170,420 +174,332 @@ const Drivers = () => {
   };
 
   return (
-    <div style={{
-      padding: '2rem',
-      backgroundColor: '#1a1a1a',
-      minHeight: '100vh',
-      color: '#fff'
-    }}>
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto'
-      }}>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '2rem'
-        }}>
-          <h1 style={{ margin: 0 }}>Driver Management</h1>
-          <button
-            onClick={() => setShowForm(!showForm)}
-            style={{
-              padding: '0.75rem 1.5rem',
-              borderRadius: '4px',
-              border: 'none',
-              backgroundColor: '#4CAF50',
-              color: '#fff',
-              fontSize: '1rem',
-              fontWeight: 'bold',
-              cursor: 'pointer'
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Driver Management</h1>
+        <button
+          onClick={() => setShowForm(!showForm)}
+          className={styles.addButton}
+        >
+          {showForm ? 'Cancel' : '+ Add Driver'}
+        </button>
+      </div>
+
+      {error && (
+        <div className={styles.error}>
+          {error}
+          <button 
+            onClick={() => setError('')}
+            style={{ 
+              float: 'right', 
+              background: 'none', 
+              border: 'none', 
+              color: 'inherit', 
+              cursor: 'pointer',
+              fontSize: '1.25rem'
             }}
           >
-            {showForm ? 'Cancel' : 'Add Driver'}
+            ×
           </button>
         </div>
+      )}
 
-        {error && (
-          <div style={{
-            backgroundColor: '#ff4444',
-            color: '#fff',
-            padding: '1rem',
-            borderRadius: '4px',
-            marginBottom: '1rem'
-          }}>
-            {error}
-          </div>
-        )}
-
-        {showForm && (
-          <div style={{
-            backgroundColor: '#2a2a2a',
-            padding: '2rem',
-            borderRadius: '8px',
-            marginBottom: '2rem',
-            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)'
-          }}>
-            <h2 style={{ marginTop: 0 }}>
-              {editingDriver ? 'Edit Driver' : 'Add New Driver'}
-            </h2>
-            
-            <form onSubmit={handleSubmit}>
-              <div style={{ marginBottom: '1rem' }}>
-                <label style={{
-                  display: 'block',
-                  color: '#ccc',
-                  marginBottom: '0.5rem'
-                }}>
-                  Name *
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleFormChange}
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem',
-                    borderRadius: '4px',
-                    border: formErrors.name ? '1px solid #ff4444' : '1px solid #444',
-                    backgroundColor: '#333',
-                    color: '#fff',
-                    fontSize: '1rem'
-                  }}
-                />
-                {formErrors.name && (
-                  <div style={{ color: '#ff4444', fontSize: '0.875rem', marginTop: '0.25rem' }}>
-                    {formErrors.name}
-                  </div>
-                )}
-              </div>
-
-              <div style={{ marginBottom: '1rem' }}>
-                <label style={{
-                  display: 'block',
-                  color: '#ccc',
-                  marginBottom: '0.5rem'
-                }}>
-                  License Number *
-                </label>
-                <input
-                  type="text"
-                  name="licenseNumber"
-                  value={formData.licenseNumber}
-                  onChange={handleFormChange}
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem',
-                    borderRadius: '4px',
-                    border: formErrors.licenseNumber ? '1px solid #ff4444' : '1px solid #444',
-                    backgroundColor: '#333',
-                    color: '#fff',
-                    fontSize: '1rem'
-                  }}
-                />
-                {formErrors.licenseNumber && (
-                  <div style={{ color: '#ff4444', fontSize: '0.875rem', marginTop: '0.25rem' }}>
-                    {formErrors.licenseNumber}
-                  </div>
-                )}
-              </div>
-
-              <div style={{ marginBottom: '1rem' }}>
-                <label style={{
-                  display: 'block',
-                  color: '#ccc',
-                  marginBottom: '0.5rem'
-                }}>
-                  License Expiration Date *
-                </label>
-                <input
-                  type="date"
-                  name="licenseExpiration"
-                  value={formData.licenseExpiration}
-                  onChange={handleFormChange}
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem',
-                    borderRadius: '4px',
-                    border: formErrors.licenseExpiration ? '1px solid #ff4444' : '1px solid #444',
-                    backgroundColor: '#333',
-                    color: '#fff',
-                    fontSize: '1rem'
-                  }}
-                />
-                {formErrors.licenseExpiration && (
-                  <div style={{ color: '#ff4444', fontSize: '0.875rem', marginTop: '0.25rem' }}>
-                    {formErrors.licenseExpiration}
-                  </div>
-                )}
-              </div>
-
-              <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{
-                  display: 'block',
-                  color: '#ccc',
-                  marginBottom: '0.5rem'
-                }}>
-                  Status *
-                </label>
-                <select
-                  name="status"
-                  value={formData.status}
-                  onChange={handleFormChange}
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem',
-                    borderRadius: '4px',
-                    border: formErrors.status ? '1px solid #ff4444' : '1px solid #444',
-                    backgroundColor: '#333',
-                    color: '#fff',
-                    fontSize: '1rem'
-                  }}
-                >
-                  <option value="On Duty">On Duty</option>
-                  <option value="Off Duty">Off Duty</option>
-                </select>
-                {formErrors.status && (
-                  <div style={{ color: '#ff4444', fontSize: '0.875rem', marginTop: '0.25rem' }}>
-                    {formErrors.status}
-                  </div>
-                )}
-              </div>
-
-              <div style={{ display: 'flex', gap: '1rem' }}>
-                <button
-                  type="submit"
-                  disabled={formLoading}
-                  style={{
-                    flex: 1,
-                    padding: '0.75rem',
-                    borderRadius: '4px',
-                    border: 'none',
-                    backgroundColor: formLoading ? '#555' : '#4CAF50',
-                    color: '#fff',
-                    fontSize: '1rem',
-                    fontWeight: 'bold',
-                    cursor: formLoading ? 'not-allowed' : 'pointer'
-                  }}
-                >
-                  {formLoading ? 'Saving...' : (editingDriver ? 'Update Driver' : 'Create Driver')}
-                </button>
-                <button
-                  type="button"
-                  onClick={handleCancelForm}
-                  disabled={formLoading}
-                  style={{
-                    flex: 1,
-                    padding: '0.75rem',
-                    borderRadius: '4px',
-                    border: '1px solid #666',
-                    backgroundColor: 'transparent',
-                    color: '#fff',
-                    fontSize: '1rem',
-                    cursor: formLoading ? 'not-allowed' : 'pointer'
-                  }}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
-
-        {/* Filters */}
-        <div style={{
-          backgroundColor: '#2a2a2a',
-          padding: '1.5rem',
-          borderRadius: '8px',
-          marginBottom: '1.5rem',
-          display: 'flex',
-          gap: '1rem',
-          flexWrap: 'wrap',
-          alignItems: 'center'
-        }}>
-          <div style={{ flex: '1 1 200px' }}>
-            <label style={{
-              display: 'block',
-              color: '#ccc',
-              marginBottom: '0.5rem',
-              fontSize: '0.875rem'
-            }}>
-              Search by Name
-            </label>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Enter driver name..."
-              style={{
-                width: '100%',
-                padding: '0.5rem',
-                borderRadius: '4px',
-                border: '1px solid #444',
-                backgroundColor: '#333',
-                color: '#fff',
-                fontSize: '0.875rem'
-              }}
-            />
-          </div>
-
-          <div style={{ flex: '0 1 150px' }}>
-            <label style={{
-              display: 'block',
-              color: '#ccc',
-              marginBottom: '0.5rem',
-              fontSize: '0.875rem'
-            }}>
-              Status
-            </label>
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '0.5rem',
-                borderRadius: '4px',
-                border: '1px solid #444',
-                backgroundColor: '#333',
-                color: '#fff',
-                fontSize: '0.875rem'
-              }}
-            >
-              <option value="">All</option>
-              <option value="On Duty">On Duty</option>
-              <option value="Off Duty">Off Duty</option>
-            </select>
-          </div>
-
-          <div style={{ flex: '0 1 150px', display: 'flex', alignItems: 'flex-end' }}>
-            <label style={{
-              display: 'flex',
-              alignItems: 'center',
-              color: '#ccc',
-              fontSize: '0.875rem',
-              cursor: 'pointer',
-              paddingBottom: '0.5rem'
-            }}>
-              <input
-                type="checkbox"
-                checked={eligibleOnly}
-                onChange={(e) => setEligibleOnly(e.target.checked)}
-                style={{ marginRight: '0.5rem' }}
-              />
-              Eligible Only
-            </label>
-          </div>
+      {successMessage && (
+        <div className={styles.success}>
+          {successMessage}
         </div>
+      )}
 
-        {/* Driver List */}
-        {loading ? (
-          <div style={{ textAlign: 'center', padding: '2rem', color: '#ccc' }}>
-            Loading drivers...
-          </div>
-        ) : drivers.length === 0 ? (
-          <div style={{
-            backgroundColor: '#2a2a2a',
-            padding: '2rem',
-            borderRadius: '8px',
-            textAlign: 'center',
-            color: '#ccc'
+      {showForm && (
+        <div style={{
+          background: 'var(--card-bg)',
+          border: '1px solid var(--card-border)',
+          borderRadius: 'var(--radius-xl)',
+          padding: 'var(--spacing-xl)',
+          marginBottom: 'var(--spacing-xl)',
+          boxShadow: 'var(--shadow-md)'
+        }}>
+          <h2 style={{ 
+            marginTop: 0, 
+            marginBottom: 'var(--spacing-lg)',
+            color: 'var(--text-primary)',
+            fontSize: '1.25rem',
+            fontWeight: 600
           }}>
+            {editingDriver ? 'Edit Driver' : 'Add New Driver'}
+          </h2>
+          
+          <form onSubmit={handleSubmit}>
+            <div style={{ marginBottom: 'var(--spacing-md)' }}>
+              <label style={{
+                display: 'block',
+                color: 'var(--text-secondary)',
+                marginBottom: 'var(--spacing-sm)',
+                fontSize: '0.875rem',
+                fontWeight: 500
+              }}>
+                Name *
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleFormChange}
+                className={styles.searchInput}
+                style={{
+                  width: '100%',
+                  border: formErrors.name ? '1px solid var(--status-red-border)' : undefined
+                }}
+              />
+              {formErrors.name && (
+                <div style={{ color: 'var(--status-red-text)', fontSize: '0.875rem', marginTop: 'var(--spacing-xs)' }}>
+                  {formErrors.name}
+                </div>
+              )}
+            </div>
+
+            <div style={{ marginBottom: 'var(--spacing-md)' }}>
+              <label style={{
+                display: 'block',
+                color: 'var(--text-secondary)',
+                marginBottom: 'var(--spacing-sm)',
+                fontSize: '0.875rem',
+                fontWeight: 500
+              }}>
+                License Number *
+              </label>
+              <input
+                type="text"
+                name="licenseNumber"
+                value={formData.licenseNumber}
+                onChange={handleFormChange}
+                className={styles.searchInput}
+                style={{
+                  width: '100%',
+                  border: formErrors.licenseNumber ? '1px solid var(--status-red-border)' : undefined
+                }}
+              />
+              {formErrors.licenseNumber && (
+                <div style={{ color: 'var(--status-red-text)', fontSize: '0.875rem', marginTop: 'var(--spacing-xs)' }}>
+                  {formErrors.licenseNumber}
+                </div>
+              )}
+            </div>
+
+            <div style={{ marginBottom: 'var(--spacing-md)' }}>
+              <label style={{
+                display: 'block',
+                color: 'var(--text-secondary)',
+                marginBottom: 'var(--spacing-sm)',
+                fontSize: '0.875rem',
+                fontWeight: 500
+              }}>
+                License Expiration Date *
+              </label>
+              <input
+                type="date"
+                name="licenseExpiration"
+                value={formData.licenseExpiration}
+                onChange={handleFormChange}
+                className={styles.searchInput}
+                style={{
+                  width: '100%',
+                  border: formErrors.licenseExpiration ? '1px solid var(--status-red-border)' : undefined
+                }}
+              />
+              {formErrors.licenseExpiration && (
+                <div style={{ color: 'var(--status-red-text)', fontSize: '0.875rem', marginTop: 'var(--spacing-xs)' }}>
+                  {formErrors.licenseExpiration}
+                </div>
+              )}
+            </div>
+
+            <div style={{ marginBottom: 'var(--spacing-lg)' }}>
+              <label style={{
+                display: 'block',
+                color: 'var(--text-secondary)',
+                marginBottom: 'var(--spacing-sm)',
+                fontSize: '0.875rem',
+                fontWeight: 500
+              }}>
+                Status *
+              </label>
+              <select
+                name="status"
+                value={formData.status}
+                onChange={handleFormChange}
+                className={styles.filterSelect}
+                style={{
+                  width: '100%',
+                  border: formErrors.status ? '1px solid var(--status-red-border)' : undefined
+                }}
+              >
+                <option value="On Duty">On Duty</option>
+                <option value="Off Duty">Off Duty</option>
+              </select>
+              {formErrors.status && (
+                <div style={{ color: 'var(--status-red-text)', fontSize: '0.875rem', marginTop: 'var(--spacing-xs)' }}>
+                  {formErrors.status}
+                </div>
+              )}
+            </div>
+
+            <div style={{ display: 'flex', gap: 'var(--spacing-md)' }}>
+              <button
+                type="submit"
+                disabled={formLoading}
+                className={styles.addButton}
+                style={{ flex: 1 }}
+              >
+                {formLoading ? 'Saving...' : (editingDriver ? 'Update Driver' : 'Create Driver')}
+              </button>
+              <button
+                type="button"
+                onClick={handleCancelForm}
+                disabled={formLoading}
+                style={{
+                  flex: 1,
+                  padding: '0.75rem',
+                  borderRadius: 'var(--radius-lg)',
+                  border: '1px solid var(--border-primary)',
+                  background: 'var(--bg-white)',
+                  color: 'var(--text-secondary)',
+                  fontSize: '0.9375rem',
+                  fontWeight: 600,
+                  cursor: formLoading ? 'not-allowed' : 'pointer',
+                  transition: 'all var(--transition-base)'
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* Filters */}
+      <div className={styles.controls}>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search by name..."
+          className={styles.searchInput}
+        />
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className={styles.filterSelect}
+        >
+          <option value="">All Status</option>
+          <option value="On Duty">On Duty</option>
+          <option value="Off Duty">Off Duty</option>
+        </select>
+        <label style={{
+          display: 'flex',
+          alignItems: 'center',
+          color: 'var(--text-secondary)',
+          fontSize: '0.9375rem',
+          cursor: 'pointer',
+          padding: '0.75rem 1rem',
+          background: 'var(--bg-white)',
+          border: '1px solid var(--border-primary)',
+          borderRadius: 'var(--radius-lg)',
+          fontWeight: 500
+        }}>
+          <input
+            type="checkbox"
+            checked={eligibleOnly}
+            onChange={(e) => setEligibleOnly(e.target.checked)}
+            style={{ marginRight: 'var(--spacing-sm)' }}
+          />
+          Eligible Only
+        </label>
+      </div>
+
+      {/* Driver List */}
+      {loading ? (
+        <div className={styles.loading}>Loading drivers...</div>
+      ) : drivers.length === 0 ? (
+        <div className={styles.empty}>
+          <div className={styles.emptyText}>
             No drivers found. {showForm ? '' : 'Click "Add Driver" to create one.'}
           </div>
-        ) : (
-          <div style={{
-            backgroundColor: '#2a2a2a',
-            borderRadius: '8px',
-            overflow: 'hidden'
-          }}>
-            <table style={{
-              width: '100%',
-              borderCollapse: 'collapse'
-            }}>
-              <thead>
-                <tr style={{ backgroundColor: '#333' }}>
-                  <th style={{ padding: '1rem', textAlign: 'left', borderBottom: '1px solid #444' }}>
-                    Name
-                  </th>
-                  <th style={{ padding: '1rem', textAlign: 'left', borderBottom: '1px solid #444' }}>
-                    License Number
-                  </th>
-                  <th style={{ padding: '1rem', textAlign: 'left', borderBottom: '1px solid #444' }}>
-                    License Expiration
-                  </th>
-                  <th style={{ padding: '1rem', textAlign: 'left', borderBottom: '1px solid #444' }}>
-                    Status
-                  </th>
-                  <th style={{ padding: '1rem', textAlign: 'center', borderBottom: '1px solid #444' }}>
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {drivers.map((driver) => (
-                  <tr key={driver.id} style={{ borderBottom: '1px solid #333' }}>
-                    <td style={{ padding: '1rem' }}>
-                      {driver.name}
-                    </td>
-                    <td style={{ padding: '1rem' }}>
-                      {driver.licenseNumber}
-                    </td>
-                    <td style={{ padding: '1rem' }}>
-                      <div>
-                        {new Date(driver.licenseExpiration).toLocaleDateString()}
-                      </div>
-                      {isLicenseExpired(driver.licenseExpiration) && (
-                        <div style={{
-                          color: '#ff4444',
-                          fontSize: '0.75rem',
-                          marginTop: '0.25rem'
-                        }}>
-                          Expired
-                        </div>
-                      )}
-                    </td>
-                    <td style={{ padding: '1rem' }}>
-                      <StatusPill status={driver.status} type="driver" />
-                    </td>
-                    <td style={{ padding: '1rem', textAlign: 'center' }}>
-                      <button
-                        onClick={() => handleEdit(driver)}
-                        style={{
-                          padding: '0.5rem 1rem',
-                          marginRight: '0.5rem',
-                          borderRadius: '4px',
-                          border: 'none',
-                          backgroundColor: '#2196F3',
-                          color: '#fff',
-                          fontSize: '0.875rem',
-                          cursor: 'pointer'
-                        }}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDelete(driver.id)}
-                        style={{
-                          padding: '0.5rem 1rem',
-                          borderRadius: '4px',
-                          border: 'none',
-                          backgroundColor: '#f44336',
-                          color: '#fff',
-                          fontSize: '0.875rem',
-                          cursor: 'pointer'
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className={styles.vehicleGrid}>
+          {drivers.map((driver) => (
+            <div key={driver.id} className={styles.vehicleCard}>
+              <div className={styles.vehicleHeader}>
+                <h3 className={styles.vehicleModel}>{driver.name}</h3>
+                <StatusPill status={driver.status} type="driver" />
+              </div>
+              <div className={styles.vehicleDetails}>
+                <div className={styles.detailRow}>
+                  <span className={styles.detailLabel}>License Number:</span>
+                  <span className={styles.detailValue}>{driver.licenseNumber}</span>
+                </div>
+                <div className={styles.detailRow}>
+                  <span className={styles.detailLabel}>License Expiration:</span>
+                  <span className={styles.detailValue}>
+                    {new Date(driver.licenseExpiration).toLocaleDateString()}
+                    {isLicenseExpired(driver.licenseExpiration) && (
+                      <span style={{
+                        color: 'var(--status-red-text)',
+                        fontSize: '0.75rem',
+                        marginLeft: 'var(--spacing-xs)',
+                        fontWeight: 600
+                      }}>
+                        (Expired)
+                      </span>
+                    )}
+                  </span>
+                </div>
+              </div>
+              <div style={{ 
+                marginTop: 'var(--spacing-md)', 
+                display: 'flex', 
+                gap: 'var(--spacing-sm)'
+              }}>
+                <button
+                  onClick={() => handleEdit(driver)}
+                  style={{
+                    flex: 1,
+                    padding: '0.5rem 1rem',
+                    borderRadius: 'var(--radius-md)',
+                    border: 'none',
+                    background: 'var(--accent-primary-light)',
+                    color: 'var(--accent-primary)',
+                    fontSize: '0.875rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    transition: 'all var(--transition-base)'
+                  }}
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(driver.id)}
+                  style={{
+                    flex: 1,
+                    padding: '0.5rem 1rem',
+                    borderRadius: 'var(--radius-md)',
+                    border: 'none',
+                    background: 'var(--status-red-bg)',
+                    color: 'var(--status-red-text)',
+                    fontSize: '0.875rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    transition: 'all var(--transition-base)'
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

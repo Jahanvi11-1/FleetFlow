@@ -180,14 +180,14 @@ function Analytics() {
           className={styles.exportButton}
           disabled={exporting || roiData.length === 0}
         >
-          📊 Export CSV
+          Export CSV
         </button>
         <button 
           onClick={() => handleExport('pdf')}
           className={styles.exportButton}
           disabled={exporting || roiData.length === 0}
         >
-          📄 Export PDF
+          Export PDF
         </button>
       </div>
 
@@ -196,7 +196,6 @@ function Analytics() {
         <h2 className={styles.sectionTitle}>Vehicle ROI Analysis</h2>
         {roiData.length === 0 ? (
           <div className={styles.empty}>
-            <div className={styles.emptyIcon}>📊</div>
             <div className={styles.emptyText}>No ROI data available</div>
           </div>
         ) : (
@@ -236,7 +235,6 @@ function Analytics() {
         <h2 className={styles.sectionTitle}>Fuel Efficiency Analysis</h2>
         {fuelData.length === 0 ? (
           <div className={styles.empty}>
-            <div className={styles.emptyIcon}>⛽</div>
             <div className={styles.emptyText}>No fuel efficiency data available</div>
           </div>
         ) : (

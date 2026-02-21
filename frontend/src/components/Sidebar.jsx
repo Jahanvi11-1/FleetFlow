@@ -12,12 +12,12 @@ function Sidebar({ isOpen, onClose, userRole }) {
 
   // Navigation items with role-based access control
   const navigationItems = [
-    { path: '/', label: 'Dashboard', icon: '📊', roles: ['Manager', 'Dispatcher', 'Safety Officer', 'Financial Analyst'] },
-    { path: '/vehicles', label: 'Vehicles', icon: '🚛', roles: ['Manager', 'Dispatcher', 'Safety Officer'] },
-    { path: '/drivers', label: 'Drivers', icon: '👤', roles: ['Manager', 'Dispatcher', 'Safety Officer'] },
-    { path: '/trips', label: 'Trips', icon: '🗺️', roles: ['Manager', 'Dispatcher'] },
-    { path: '/maintenance', label: 'Maintenance', icon: '🔧', roles: ['Manager', 'Safety Officer'] },
-    { path: '/analytics', label: 'Analytics', icon: '📈', roles: ['Manager', 'Financial Analyst'] }
+    { path: '/', label: 'Dashboard', roles: ['Manager', 'Dispatcher', 'Safety Officer', 'Financial Analyst'] },
+    { path: '/vehicles', label: 'Vehicles', roles: ['Manager', 'Dispatcher', 'Safety Officer'] },
+    { path: '/drivers', label: 'Drivers', roles: ['Manager', 'Dispatcher', 'Safety Officer'] },
+    { path: '/trips', label: 'Trips', roles: ['Manager', 'Dispatcher'] },
+    { path: '/maintenance', label: 'Maintenance', roles: ['Manager', 'Safety Officer'] },
+    { path: '/analytics', label: 'Analytics', roles: ['Manager', 'Financial Analyst'] }
   ];
 
   // Filter navigation items by user role
@@ -65,7 +65,6 @@ function Sidebar({ isOpen, onClose, userRole }) {
                   className={`sidebar__link ${isActive(item.path) ? 'sidebar__link--active' : ''}`}
                   onClick={onClose}
                 >
-                  <span className="sidebar__icon">{item.icon}</span>
                   <span className="sidebar__label">{item.label}</span>
                 </Link>
               </li>

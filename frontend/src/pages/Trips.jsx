@@ -240,7 +240,6 @@ function Trips() {
 
       {filteredTrips.length === 0 ? (
         <div className={styles.empty}>
-          <div className={styles.emptyIcon}>🚚</div>
           <div className={styles.emptyText}>
             {searchQuery || statusFilter !== 'all' || vehicleFilter !== 'all'
               ? 'No trips match your filters' 

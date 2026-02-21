@@ -136,31 +136,27 @@ function Dashboard() {
           <h2 className={styles.widgetTitle}>Fleet Overview</h2>
           <div className={styles.statsGrid}>
             <div className={styles.statCard}>
-              <div className={styles.statIcon}>🚗</div>
               <div className={styles.statContent}>
-                <div className={styles.statValue}>{stats.totalVehicles}</div>
                 <div className={styles.statLabel}>Total Vehicles</div>
+                <div className={styles.statValue}>{stats.totalVehicles}</div>
               </div>
             </div>
             <div className={styles.statCard}>
-              <div className={styles.statIcon} style={{ color: '#10b981' }}>✓</div>
               <div className={styles.statContent}>
-                <div className={styles.statValue}>{stats.availableVehicles}</div>
                 <div className={styles.statLabel}>Available</div>
+                <div className={styles.statValue} style={{ color: 'var(--status-green)' }}>{stats.availableVehicles}</div>
               </div>
             </div>
             <div className={styles.statCard}>
-              <div className={styles.statIcon} style={{ color: '#f59e0b' }}>🚚</div>
               <div className={styles.statContent}>
-                <div className={styles.statValue}>{stats.onTripVehicles}</div>
                 <div className={styles.statLabel}>On Trip</div>
+                <div className={styles.statValue} style={{ color: 'var(--status-amber)' }}>{stats.onTripVehicles}</div>
               </div>
             </div>
             <div className={styles.statCard}>
-              <div className={styles.statIcon} style={{ color: '#ef4444' }}>🔧</div>
               <div className={styles.statContent}>
-                <div className={styles.statValue}>{stats.inShopVehicles}</div>
                 <div className={styles.statLabel}>In Shop</div>
+                <div className={styles.statValue} style={{ color: 'var(--status-amber)' }}>{stats.inShopVehicles}</div>
               </div>
             </div>
           </div>
@@ -202,7 +198,6 @@ function Dashboard() {
           </div>
           {recentTrips.length === 0 ? (
             <div className={styles.emptyState}>
-              <div className={styles.emptyIcon}>🚚</div>
               <div className={styles.emptyText}>No trips yet</div>
             </div>
           ) : (
@@ -232,7 +227,6 @@ function Dashboard() {
           </div>
           {topPerformers.length === 0 ? (
             <div className={styles.emptyState}>
-              <div className={styles.emptyIcon}>📊</div>
               <div className={styles.emptyText}>No ROI data available</div>
             </div>
           ) : (
@@ -260,15 +254,12 @@ function Dashboard() {
           <h2 className={styles.widgetTitle}>Quick Actions</h2>
           <div className={styles.actionList}>
             <Link to="/vehicles" className={styles.actionButton}>
-              <span className={styles.actionIcon}>🚗</span>
               <span>Add Vehicle</span>
             </Link>
             <Link to="/trips" className={styles.actionButton}>
-              <span className={styles.actionIcon}>🚚</span>
               <span>Create Trip</span>
             </Link>
             <Link to="/maintenance" className={styles.actionButton}>
-              <span className={styles.actionIcon}>🔧</span>
               <span>Log Maintenance</span>
             </Link>
           </div>
