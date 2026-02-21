@@ -78,11 +78,6 @@ exit()
 python run.py
 ```
 
-5. Run tests:
-```bash
-pytest
-```
-
 ## Frontend Setup
 
 1. Install Node dependencies:
@@ -96,10 +91,6 @@ npm install
 npm run dev
 ```
 
-3. Run tests:
-```bash
-npm test
-```
 
 ## Features
 
