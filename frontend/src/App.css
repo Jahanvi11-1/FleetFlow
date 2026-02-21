@@ -1,0 +1,274 @@
+/* App Layout - Responsive Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  padding-top: 70px; /* Account for fixed header */
+  transition: margin-left var(--transition-base);
+}
+
+/* Responsive adjustments for main content */
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 60px; /* Smaller header on mobile */
+  }
+}
+
+/* Page Container Base */
+.page-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .page-container {
+    padding: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .page-container {
+    padding: var(--spacing-sm);
+  }
+}
+
+/* Responsive Grid Utilities */
+.responsive-grid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.responsive-grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.responsive-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.responsive-grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .responsive-grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .responsive-grid--3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .responsive-grid--2,
+  .responsive-grid--3,
+  .responsive-grid--4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .responsive-grid {
+    gap: var(--spacing-md);
+  }
+}
+
+/* Responsive Table */
+.responsive-table-container {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg-secondary);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+}
+
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.responsive-table th,
+.responsive-table td {
+  padding: var(--spacing-md);
+  text-align: left;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.responsive-table th {
+  color: var(--text-primary);
+  font-weight: 600;
+  background: var(--glass-bg-light);
+}
+
+.responsive-table td {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .responsive-table th,
+  .responsive-table td {
+    padding: var(--spacing-sm);
+    font-size: 0.875rem;
+  }
+}
+
+/* Responsive Form */
+.responsive-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  .responsive-form {
+    gap: var(--spacing-md);
+  }
+}
+
+/* Responsive Button Group */
+.button-group {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .button-group button {
+    width: 100%;
+  }
+}
+
+/* Responsive Card Grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+}
+
+/* Hide on Mobile */
+.hide-mobile {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
+/* Show only on Mobile */
+.show-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .show-mobile {
+    display: block;
+  }
+}
+
+/* Responsive Text */
+.responsive-text-lg {
+  font-size: 1.125rem;
+}
+
+.responsive-text-xl {
+  font-size: 1.25rem;
+}
+
+.responsive-text-2xl {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .responsive-text-lg {
+    font-size: 1rem;
+  }
+  
+  .responsive-text-xl {
+    font-size: 1.125rem;
+  }
+  
+  .responsive-text-2xl {
+    font-size: 1.25rem;
+  }
+}
+
+/* Responsive Spacing */
+.responsive-spacing-top {
+  margin-top: var(--spacing-xl);
+}
+
+.responsive-spacing-bottom {
+  margin-bottom: var(--spacing-xl);
+}
+
+@media (max-width: 768px) {
+  .responsive-spacing-top {
+    margin-top: var(--spacing-lg);
+  }
+  
+  .responsive-spacing-bottom {
+    margin-bottom: var(--spacing-lg);
+  }
+}
+
+/* Responsive Flex */
+.responsive-flex {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .responsive-flex {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Touch-friendly targets on mobile */
+@media (max-width: 768px) {
+  button,
+  a,
+  input[type="checkbox"],
+  input[type="radio"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

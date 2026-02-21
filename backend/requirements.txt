@@ -1,0 +1,12 @@
+Flask==3.0.0
+Flask-SQLAlchemy==3.1.1
+Flask-Migrate==4.0.5
+Flask-JWT-Extended==4.6.0
+Flask-CORS==4.0.0
+python-dotenv==1.0.0
+hypothesis==6.92.1
+pytest==7.4.3
+reportlab==4.0.7
+
+# Optional: Install for PostgreSQL production use
+# psycopg2-binary==2.9.9
