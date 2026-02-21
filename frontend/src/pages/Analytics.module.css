@@ -1,0 +1,281 @@
+.container {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #f9fafb;
+  margin: 0;
+}
+
+.dateRangeSection {
+  background: rgba(31, 41, 55, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.dateRangeTitle {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #f9fafb;
+  margin-bottom: 1rem;
+}
+
+.dateRangeInputs {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dateInput {
+  background: rgba(17, 24, 39, 0.5);
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: #f9fafb;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.dateInput:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.applyButton {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.applyButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.applyButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.exportSection {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.exportButton {
+  background: rgba(31, 41, 55, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  color: #f9fafb;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.exportButton:hover {
+  background: rgba(31, 41, 55, 0.7);
+  border-color: rgba(75, 85, 99, 0.5);
+  transform: translateY(-1px);
+}
+
+.exportButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: #9ca3af;
+  font-size: 1.125rem;
+}
+
+.error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  color: #ef4444;
+  margin-bottom: 1rem;
+}
+
+.success {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  color: #10b981;
+  margin-bottom: 1rem;
+}
+
+.section {
+  background: rgba(31, 41, 55, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f9fafb;
+  margin-bottom: 1.5rem;
+}
+
+.tableContainer {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead {
+  background: rgba(17, 24, 39, 0.5);
+}
+
+.table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(75, 85, 99, 0.3);
+}
+
+.table td {
+  padding: 1rem;
+  font-size: 0.875rem;
+  color: #f9fafb;
+  border-bottom: 1px solid rgba(75, 85, 99, 0.2);
+}
+
+.table tbody tr {
+  transition: background 0.2s;
+}
+
+.table tbody tr:hover {
+  background: rgba(17, 24, 39, 0.3);
+}
+
+.roiPositive {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.roiNegative {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.roiNeutral {
+  color: #9ca3af;
+}
+
+.chartContainer {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(17, 24, 39, 0.3);
+  border-radius: 8px;
+}
+
+.chartTitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #f9fafb;
+  margin-bottom: 1rem;
+}
+
+.barChart {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.barRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.barLabel {
+  min-width: 120px;
+  font-size: 0.875rem;
+  color: #9ca3af;
+  text-align: right;
+}
+
+.barContainer {
+  flex: 1;
+  height: 24px;
+  background: rgba(17, 24, 39, 0.5);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.barFill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.barValue {
+  min-width: 80px;
+  font-size: 0.875rem;
+  color: #f9fafb;
+  font-weight: 500;
+  text-align: right;
+}
+
+.empty {
+  text-align: center;
+  padding: 3rem;
+  color: #9ca3af;
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.emptyText {
+  font-size: 1.125rem;
+}
